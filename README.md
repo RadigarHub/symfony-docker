@@ -1,2 +1,2 @@
-# symfony-docker
-A Docker-based installer and runtime for the Symfony web framework
+# symfony-docker-skeleton
+A Docker-based Symfony web framework skeleton project.
