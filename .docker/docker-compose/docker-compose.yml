@@ -10,3 +10,13 @@ services:
       args:
         - BASE_IMAGE=${DOCKER_REGISTRY?}/${DOCKER_NAMESPACE?}/php-base-${ENV?}:${TAG?}
         - TARGET_PHP_VERSION=${PHP_VERSION?}
+
+  nginx:
+    image: ${DOCKER_REGISTRY?}/${DOCKER_NAMESPACE?}/nginx-${ENV?}:${TAG?}
+    build:
+      context: ../
+      dockerfile: ./images/nginx/Dockerfile
+      target: ${ENV?}
+      args:
+        - NGINX_VERSION=${NGINX_VERSION?}
+        - APP_CODE_PATH=${APP_CODE_PATH_CONTAINER?}
