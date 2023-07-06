@@ -1,0 +1,12 @@
+version: '3.7'
+
+services:
+  php-fpm:
+    image: ${DOCKER_REGISTRY?}/${DOCKER_NAMESPACE?}/php-fpm-${ENV?}:${TAG?}
+    build:
+      context: ../
+      dockerfile: ./images/php/fpm/Dockerfile
+      target: ${ENV?}
+      args:
+        - BASE_IMAGE=${DOCKER_REGISTRY?}/${DOCKER_NAMESPACE?}/php-base-${ENV?}:${TAG?}
+        - TARGET_PHP_VERSION=${PHP_VERSION?}
