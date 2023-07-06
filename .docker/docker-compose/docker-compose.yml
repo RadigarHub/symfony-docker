@@ -20,3 +20,17 @@ services:
       args:
         - NGINX_VERSION=${NGINX_VERSION?}
         - APP_CODE_PATH=${APP_CODE_PATH_CONTAINER?}
+
+  application:
+    image: ${DOCKER_REGISTRY?}/${DOCKER_NAMESPACE?}/application-${ENV?}:${TAG?}
+    build:
+      context: ../
+      dockerfile: ./images/php/application/Dockerfile
+      target: ${ENV?}
+      args:
+        - BASE_IMAGE=${DOCKER_REGISTRY?}/${DOCKER_NAMESPACE?}/php-base-${ENV?}:${TAG?}
+        - ENV=${ENV?}
+    # will keep the container running, even though there is no 
+    # long-running process defined as entrypoint for the container
+    # @see https://stackoverflow.com/a/55953120
+    tty: true
