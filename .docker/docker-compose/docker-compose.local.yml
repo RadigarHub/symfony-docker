@@ -23,3 +23,14 @@ services:
           - ${APP_HOST?}
     depends_on:
       - php-fpm
+
+  application:
+    build:
+      args:
+        - APP_SSH_PASSWORD=${APP_SSH_PASSWORD?}
+    volumes:
+      - ${APP_CODE_PATH_HOST?}:${APP_CODE_PATH_CONTAINER?}
+    ports:
+      - "${APPLICATION_SSH_HOST_PORT:-2222}:22"
+    networks:
+      - network
