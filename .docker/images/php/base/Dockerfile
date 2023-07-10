@@ -1,4 +1,6 @@
 ARG ALPINE_VERSION
+ARG COMPOSER_VERSION
+FROM composer:${COMPOSER_VERSION} as composer
 FROM alpine:${ALPINE_VERSION} as base
 
 # make build args available as ENV variables to downstream images
@@ -40,7 +42,9 @@ RUN apk --update-cache add ca-certificates && \
 	echo "https://php.hernandev.com/v${ALPINE_VERSION}/php-${TARGET_PHP_VERSION}" >> /etc/apk/repositories && \
 	apk add --update --no-cache  \
 		php8~=${TARGET_PHP_VERSION} \
+		php-mbstring~=${TARGET_PHP_VERSION} \
 		php-pdo~=${TARGET_PHP_VERSION} \
+		php-phar~=${TARGET_PHP_VERSION} \
 # make "php" as command available by creating a symlink
 # https://github.com/codecasts/php-alpine/issues/20#issuecomment-350477886
 	&& ln -s /usr/bin/php8 /usr/bin/php
@@ -53,6 +57,8 @@ COPY ./images/php/base/conf.d/zz-app-${ENV}.ini /etc/php8/conf.d/
 
 COPY --chown=$APP_USER_NAME:$APP_GROUP_NAME ./images/php/base/.bashrc /home/${APP_USER_NAME}/.bashrc
 COPY ./images/php/base/.bashrc /root/.bashrc
+
+COPY --from=composer /usr/bin/composer /usr/local/bin/composer
 
 WORKDIR $APP_CODE_PATH
 
