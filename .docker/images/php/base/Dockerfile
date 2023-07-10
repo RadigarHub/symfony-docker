@@ -69,3 +69,8 @@ FROM base as local
 # see https://askubuntu.com/a/340669 for not requiring a sudo pw
 RUN echo "root ALL=(ALL) NOPASSWD: ALL " | tee -a "/etc/sudoers.d/users" && \
 	echo "${APP_USER_NAME} ALL=(ALL) NOPASSWD: ALL " | tee -a "/etc/sudoers.d/users"
+
+RUN apk add --no-cache --update \
+		php-xdebug~=${TARGET_PHP_VERSION} \
+	# ensure that xdebug is not enabled by default
+	&& rm -f /etc/php8/conf.d/00_xdebug.ini
