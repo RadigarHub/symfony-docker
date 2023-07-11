@@ -1,5 +1,9 @@
 <?php
 
-echo 'Hello World!';
-echo '<br>';
-echo 'This is a file to test xdebug';
+use App\Kernel;
+
+require_once dirname(__DIR__).'/vendor/autoload_runtime.php';
+
+return function (array $context) {
+    return new Kernel($context['APP_ENV'], (bool) $context['APP_DEBUG']);
+};
