@@ -42,9 +42,20 @@ RUN apk --update-cache add ca-certificates && \
 	echo "https://php.hernandev.com/v${ALPINE_VERSION}/php-${TARGET_PHP_VERSION}" >> /etc/apk/repositories && \
 	apk add --update --no-cache  \
 		php8~=${TARGET_PHP_VERSION} \
+		php-ctype~=${TARGET_PHP_VERSION} \
+		php-curl~=${TARGET_PHP_VERSION} \
+		php-dom~=${TARGET_PHP_VERSION} \
+		php-iconv~=${TARGET_PHP_VERSION} \
+		php-intl~=${TARGET_PHP_VERSION} \
 		php-mbstring~=${TARGET_PHP_VERSION} \
+		php-opcache~=${TARGET_PHP_VERSION} \
+		php-openssl~=${TARGET_PHP_VERSION} \
 		php-pdo~=${TARGET_PHP_VERSION} \
+		php-pdo_pgsql~=${TARGET_PHP_VERSION} \
 		php-phar~=${TARGET_PHP_VERSION} \
+		php-posix~=${TARGET_PHP_VERSION} \
+		php-session~=${TARGET_PHP_VERSION} \
+		php-xml~=${TARGET_PHP_VERSION} \
 # make "php" as command available by creating a symlink
 # https://github.com/codecasts/php-alpine/issues/20#issuecomment-350477886
 	&& ln -s /usr/bin/php8 /usr/bin/php
@@ -71,6 +82,7 @@ RUN echo "root ALL=(ALL) NOPASSWD: ALL " | tee -a "/etc/sudoers.d/users" && \
 	echo "${APP_USER_NAME} ALL=(ALL) NOPASSWD: ALL " | tee -a "/etc/sudoers.d/users"
 
 RUN apk add --no-cache --update \
+		postgresql-client \
 		php-xdebug~=${TARGET_PHP_VERSION} \
 	# ensure that xdebug is not enabled by default
 	&& rm -f /etc/php8/conf.d/00_xdebug.ini
