@@ -1,8 +1,13 @@
 default:
-    suites:
-        default:
-            contexts:
-                - App\Tests\Behat\DemoContext
+  autoload:
+    '': '%paths.base%/design' # autoload for behat things
 
-    extensions:
-        FriendsOfBehat\SymfonyExtension: null
+  suites:
+    default:
+      paths:
+        - 'design/Features' # This is where you will put your *.feature files
+      contexts:
+        - Design\App\Contexts\DemoContext # This is where you will put your contexts
+
+  extensions:
+    FriendsOfBehat\SymfonyExtension: { }

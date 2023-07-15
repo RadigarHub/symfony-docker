@@ -1,0 +1,7 @@
+suites:
+  default:
+    namespace: App # Application root namespace
+    psr4_prefix: App # Used to create the namespace when generating code
+    spec_prefix: 'Spec' # Folder of the specs under spec_path
+    src_path: '%paths.config%/src' # Code sources folder
+    spec_path: '%paths.config%/design' # Path to store specifications

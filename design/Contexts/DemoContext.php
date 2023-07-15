@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Behat;
+namespace Design\App\Contexts;
 
 use Behat\Behat\Context\Context;
+use PHPUnit\Framework\Assert;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -37,12 +38,10 @@ final class DemoContext implements Context
     }
 
     /**
-     * @Then the response should be received
+     * @Then the response should return HTTP_OK status code
      */
-    public function theResponseShouldBeReceived(): void
+    public function theResponseShouldReturnHttpOkStatusCode(): void
     {
-        if ($this->response === null) {
-            throw new \RuntimeException('No response received');
-        }
+        Assert::assertEquals(Response::HTTP_OK, $this->response->getStatusCode());
     }
 }
