@@ -65,6 +65,9 @@ ifndef EXECUTE_IN_CONTAINER
 	endif
 endif
 ifeq ($(EXECUTE_IN_CONTAINER),true)
+	ifeq ($(ENV),local)
+		DOCKER_COMPOSE_EXEC_OPTIONS=-t
+	endif
 	EXECUTE_IN_ANY_CONTAINER:=$(DOCKER_COMPOSE) exec $(DOCKER_COMPOSE_EXEC_OPTIONS) --user $(APP_USER_NAME) $(DOCKER_SERVICE_NAME)
 	EXECUTE_IN_APPLICATION_CONTAINER:=$(DOCKER_COMPOSE) exec $(DOCKER_COMPOSE_EXEC_OPTIONS) --user $(APP_USER_NAME) $(DOCKER_SERVICE_NAME_APPLICATION)
 endif
@@ -117,7 +120,7 @@ docker-config: validate-docker-variables ## List the configuration
 	@$(DOCKER_COMPOSE) config
 
 .PHONY: docker-exec
-docker-exec: validate-docker-variables ## Execute a command in a docker container. Usage: `make docker-exec DOCKER_COMPOSE_EXEC_OPTIONS="-t" DOCKER_SERVICE_NAME="application" DOCKER_COMMAND="echo 'Hello world!'"`
+docker-exec: validate-docker-variables ## Execute a command in a docker container. Usage: `make docker-exec DOCKER_SERVICE_NAME="application" DOCKER_COMMAND="echo 'Hello world!'"`
 	@$(if $(DOCKER_SERVICE_NAME),,$(error "DOCKER_SERVICE_NAME is undefined"))
 	@$(if $(DOCKER_COMMAND),,$(error "DOCKER_COMMAND is undefined"))
 	$(DOCKER_COMPOSE) exec $(DOCKER_COMPOSE_EXEC_OPTIONS) $(DOCKER_SERVICE_NAME) $(DOCKER_COMMAND)
