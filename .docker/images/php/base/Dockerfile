@@ -64,7 +64,7 @@ RUN apk --update-cache add ca-certificates && \
 RUN sed -e 's;/bin/ash$;/bin/bash;g' -i /etc/passwd
 
 COPY ./images/php/base/conf.d/zz-app.ini /etc/php8/conf.d/
-COPY ./images/php/base/conf.d/zz-app-${ENV}.ini /etc/php8/conf.d/
+COPY ./images/php/base/conf.d/zzz-app-${ENV}.ini /etc/php8/conf.d/
 
 COPY --chown=$APP_USER_NAME:$APP_GROUP_NAME ./images/php/base/.bashrc /home/${APP_USER_NAME}/.bashrc
 COPY ./images/php/base/.bashrc /root/.bashrc
