@@ -52,6 +52,12 @@ TAG?=
 # Common variable to pass arbitrary options to targets
 ARGS?=
 
+# bash colors
+RED:=\033[0;31m
+GREEN:=\033[0;32m
+YELLOW:=\033[0;33m
+NO_COLOR:=\033[0m
+
 # @see https://www.thapaliya.com/en/writings/well-documented-makefiles/
 .DEFAULT_GOAL:=help
 
