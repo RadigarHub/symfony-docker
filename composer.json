@@ -20,12 +20,12 @@
         "symfony/yaml": "6.3.*"
     },
     "require-dev": {
-        "roave/security-advisories": "dev-latest",
         "friends-of-behat/mink-browserkit-driver": "^1.6",
         "friends-of-behat/mink-extension": "^2.7",
         "friends-of-behat/symfony-extension": "^2.4",
         "phpspec/phpspec": "^7.4",
         "phpunit/phpunit": "^9.5",
+        "roave/security-advisories": "dev-latest",
         "symfony/browser-kit": "6.3.*",
         "symfony/css-selector": "6.3.*",
         "symfony/maker-bundle": "^1.50",

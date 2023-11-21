@@ -8,5 +8,5 @@ Feature:
     I want to have a demo scenario
 
     Scenario: It receives a response from Symfony's kernel
-        When a demo scenario sends a request to "/api/check"
+        When a demo scenario sends a request to "/api/health-check"
         Then the response should return HTTP_OK status code

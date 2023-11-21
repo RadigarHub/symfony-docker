@@ -1,5 +1,4 @@
-controllers:
-    resource:
-        path: ../src/Infrastructure/EntryPoint/Api/
-        namespace: App\Infrastructure\EntryPoint\Api
-    type: attribute
+health-check:
+  path: /api/health-check
+  controller: App\Infrastructure\Api\Controller\HealthCheckGetController
+  methods:  [GET]

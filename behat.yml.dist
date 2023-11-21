@@ -5,9 +5,10 @@ default:
   suites:
     default:
       paths:
-        - 'design/Features' # This is where you will put your *.feature files
+        - '%paths.base%/design/Features' # This is where you will put your *.feature files
       contexts:
         - Design\App\Contexts\DemoContext # This is where you will put your contexts
 
   extensions:
-    FriendsOfBehat\SymfonyExtension: { }
+    FriendsOfBehat\SymfonyExtension:
+      bootstrap: tests/bootstrap.php

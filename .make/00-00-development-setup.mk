@@ -8,7 +8,7 @@ dev-init: ## Run this command once after cloning the repo to initialize everythi
 	"$(MAKE)" -s dev-verify-tools
 	@printf	"$(GREEN)Verifying 'docker compose' version$(NO_COLOR)\n"
 	"$(MAKE)" -s dev-verify-compose-version
-	@printf	"$(GREEN)Intializing 'docker'$(NO_COLOR)\n"
+	@printf	"$(GREEN)Initializing 'docker'$(NO_COLOR)\n"
 	"$(MAKE)" -s docker-init
 	@printf	"$(GREEN)Initializing user id$(NO_COLOR)\n"
 	"$(MAKE)" -s dev-init-user-id
