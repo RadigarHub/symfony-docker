@@ -34,37 +34,32 @@ RUN apk add --update --no-cache \
 		vim
 
 # install PHP
-# Note: we need to use a custom apk repository because the official ones will likely not include the latest PHP version.
-# @see https://github.com/codecasts/php-alpine
-ADD https://php.hernandev.com/key/php-alpine.rsa.pub /etc/apk/keys/php-alpine.rsa.pub
-
 RUN apk --update-cache add ca-certificates && \
-	echo "https://php.hernandev.com/v${ALPINE_VERSION}/php-${TARGET_PHP_VERSION}" >> /etc/apk/repositories && \
 	apk add --update --no-cache  \
-		php8~=${TARGET_PHP_VERSION} \
-		php-ctype~=${TARGET_PHP_VERSION} \
-		php-curl~=${TARGET_PHP_VERSION} \
-		php-dom~=${TARGET_PHP_VERSION} \
-		php-iconv~=${TARGET_PHP_VERSION} \
-		php-intl~=${TARGET_PHP_VERSION} \
-		php-mbstring~=${TARGET_PHP_VERSION} \
-		php-opcache~=${TARGET_PHP_VERSION} \
-		php-openssl~=${TARGET_PHP_VERSION} \
-		php-pdo~=${TARGET_PHP_VERSION} \
-		php-pdo_pgsql~=${TARGET_PHP_VERSION} \
-		php-phar~=${TARGET_PHP_VERSION} \
-		php-posix~=${TARGET_PHP_VERSION} \
-		php-session~=${TARGET_PHP_VERSION} \
-		php-xml~=${TARGET_PHP_VERSION} \
-# make "php" as command available by creating a symlink
-# https://github.com/codecasts/php-alpine/issues/20#issuecomment-350477886
-	&& ln -s /usr/bin/php8 /usr/bin/php
+		php${TARGET_PHP_VERSION} \
+		php${TARGET_PHP_VERSION}-ctype \
+		php${TARGET_PHP_VERSION}-curl \
+		php${TARGET_PHP_VERSION}-dom \
+		php${TARGET_PHP_VERSION}-iconv \
+		php${TARGET_PHP_VERSION}-intl \
+		php${TARGET_PHP_VERSION}-mbstring \
+		php${TARGET_PHP_VERSION}-opcache \
+		php${TARGET_PHP_VERSION}-openssl \
+		php${TARGET_PHP_VERSION}-pdo \
+		php${TARGET_PHP_VERSION}-pdo_pgsql \
+		php${TARGET_PHP_VERSION}-phar \
+		php${TARGET_PHP_VERSION}-posix \
+		php${TARGET_PHP_VERSION}-session \
+		php${TARGET_PHP_VERSION}-simplexml \
+		php${TARGET_PHP_VERSION}-tokenizer \
+		php${TARGET_PHP_VERSION}-xml \
+		php${TARGET_PHP_VERSION}-xmlwriter
 
 # make bash default shell
 RUN sed -e 's;/bin/ash$;/bin/bash;g' -i /etc/passwd
 
-COPY ./images/php/base/conf.d/zz-app.ini /etc/php8/conf.d/
-COPY ./images/php/base/conf.d/zzz-app-${ENV}.ini /etc/php8/conf.d/
+COPY ./images/php/base/conf.d/zz-app.ini /etc/php${TARGET_PHP_VERSION}/conf.d/
+COPY ./images/php/base/conf.d/zzz-app-${ENV}.ini /etc/php${TARGET_PHP_VERSION}/conf.d/
 
 COPY --chown=$APP_USER_NAME:$APP_GROUP_NAME ./images/php/base/.bashrc /home/${APP_USER_NAME}/.bashrc
 COPY ./images/php/base/.bashrc /root/.bashrc
@@ -83,6 +78,6 @@ RUN echo "root ALL=(ALL) NOPASSWD: ALL " | tee -a "/etc/sudoers.d/users" && \
 
 RUN apk add --no-cache --update \
 		postgresql-client \
-		php-xdebug~=${TARGET_PHP_VERSION} \
+		php${TARGET_PHP_VERSION}-xdebug \
 	# ensure that xdebug is not enabled by default
-	&& rm -f /etc/php8/conf.d/00_xdebug.ini
+	&& rm -f /etc/php${TARGET_PHP_VERSION}/conf.d/00_xdebug.ini
