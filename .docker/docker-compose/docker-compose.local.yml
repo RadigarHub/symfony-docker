@@ -4,6 +4,11 @@ networks:
   network:
     driver: ${NETWORKS_DRIVER?}
 
+volumes:
+  postgres-data:
+    name: postgres-data-${ENV?}
+    driver: ${VOLUMES_DRIVER?}
+
 services:
   php-fpm:
     environment:
@@ -42,3 +47,16 @@ services:
       - network
     extra_hosts:
       - host.docker.internal:host-gateway
+
+  postgres:
+    image: postgres:${POSTGRES_VERSION?}
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-application_db}
+      POSTGRES_USER: ${POSTGRES_USER:-application_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD?}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data:rw
+    networks:
+      - network
+    ports:
+      - "${POSTGRES_HOST_PORT:-5432}:5432"
