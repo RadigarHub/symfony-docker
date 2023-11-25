@@ -1,7 +1,7 @@
 /.docker/.env
 /.make/.env
-!.docker/.env.example
-!.make/variables.env
+!.docker/.env.dist
+!.make/.env.dist
 
 ###> symfony/framework-bundle ###
 /.env.local
@@ -12,11 +12,6 @@
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
-
-###> symfony/phpunit-bridge ###
-.phpunit.result.cache
-/phpunit.xml
-###< symfony/phpunit-bridge ###
 
 ###> phpunit/phpunit ###
 /phpunit.xml

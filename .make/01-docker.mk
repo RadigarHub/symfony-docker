@@ -75,9 +75,9 @@ endif
 
 ##@ [Docker]
 
-.PHONY: docker-init
-docker-init: ## Initialize the .env file for docker compose
-	@cp $(DOCKER_ENV_FILE).example $(DOCKER_ENV_FILE)
+.PHONY: docker-env
+docker-env: ## Initialize the .env file for docker compose
+	@cp $(DOCKER_ENV_FILE).dist $(DOCKER_ENV_FILE)
 
 .PHONY: docker-clean
 docker-clean: ## Remove the .env file for docker
@@ -94,9 +94,9 @@ validate-docker-variables: .docker/.env
 	@$(if $(APP_USER_NAME),,$(error APP_USER_NAME is undefined - Did you run make-init?))
 
 .docker/.env:
-	@cp $(DOCKER_ENV_FILE).example $(DOCKER_ENV_FILE)
+	@cp $(DOCKER_ENV_FILE).dist $(DOCKER_ENV_FILE)
 
-.PHONY:docker-build-image
+.PHONY: docker-build-image
 docker-build-image: validate-docker-variables ## Build all docker images OR a specific image by providing the service name via: make docker-build DOCKER_SERVICE_NAME=<service>
 	$(DOCKER_COMPOSE) build $(DOCKER_SERVICE_NAME) $(ARGS)
 
@@ -118,12 +118,6 @@ docker-down: validate-docker-variables ## Stop and remove all docker containers.
 .PHONY: docker-config
 docker-config: validate-docker-variables ## List the configuration
 	@$(DOCKER_COMPOSE) config
-
-.PHONY: docker-exec
-docker-exec: validate-docker-variables ## Execute a command in a docker container. Usage: `make docker-exec DOCKER_SERVICE_NAME="application" DOCKER_COMMAND="echo 'Hello world!'"`
-	@$(if $(DOCKER_SERVICE_NAME),,$(error "DOCKER_SERVICE_NAME is undefined"))
-	@$(if $(DOCKER_COMMAND),,$(error "DOCKER_COMMAND is undefined"))
-	$(DOCKER_COMPOSE) exec $(DOCKER_COMPOSE_EXEC_OPTIONS) $(DOCKER_SERVICE_NAME) $(DOCKER_COMMAND)
 
 .PHONY: docker-prune
 docker-prune: ## Remove ALL unused docker resources, including volumes

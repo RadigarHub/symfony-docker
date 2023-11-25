@@ -1,4 +1,5 @@
 export PS1='$(whoami):$(pwd)# '
+export PHP_INI_PATH=$(php --ini | awk '/Configuration File \(php.ini\) Path:/ {print $NF}')
 alias ll='ls -l'
 alias ls='ls --color=auto'
 
