@@ -47,8 +47,7 @@
     "autoload-dev": {
         "psr-4": {
             "Tests\\App\\": "tests/",
-            "Design\\App\\": "design/",
-            "Spec\\App\\": "design/Spec/"
+            "Design\\App\\": "design/"
         }
     },
     "replace": {
