@@ -29,6 +29,7 @@ RUN addgroup -g $APP_GROUP_ID $APP_GROUP_NAME && \
 
 RUN apk add --update --no-cache \
 		bash \
+		git \
 		make \
 		sudo \
 		vim
