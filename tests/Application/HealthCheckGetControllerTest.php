@@ -7,7 +7,7 @@ namespace Tests\App\Application;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-final class HealthCheckGetControllerTest extends WebTestCase
+class HealthCheckGetControllerTest extends WebTestCase
 {
     private KernelBrowser $client;
 

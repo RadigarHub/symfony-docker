@@ -31,12 +31,16 @@ composer-install: ## Install composer dependencies
 	"$(MAKE)" composer ARGS="dump-autoload --classmap-authoritative"
 
 .PHONY: lint
-lint: ## Check the code and display suggestions to address linting issues
+lint: ## Check the application code and display suggestions to address linting issues
 	"$(MAKE)" execute-in-container DOCKER_SERVICE_NAME=$(DOCKER_SERVICE_NAME_PHP_FPM) COMMAND="vendor/bin/ecs check"
 
 .PHONY: lint-fix
-lint-fix: ## Check the code and lint issues
+lint-fix: ## Check the application code and lint issues
 	"$(MAKE)" execute-in-container DOCKER_SERVICE_NAME=$(DOCKER_SERVICE_NAME_PHP_FPM) COMMAND="vendor/bin/ecs check --fix"
+
+.PHONY: static-analysis
+static-analysis: ## Run a static analysis of the application code
+	"$(MAKE)" execute-in-container DOCKER_SERVICE_NAME=$(DOCKER_SERVICE_NAME_PHP_FPM) COMMAND="vendor/bin/psalm"
 
 .PHONY: test
 test: test-unit test-integration test-application ## Run all tests of the application

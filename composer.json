@@ -27,13 +27,16 @@
         "friends-of-behat/symfony-extension": "^2.4",
         "phpspec/phpspec": "^7.4",
         "phpunit/phpunit": "^9.5",
+        "psalm/plugin-phpunit": "^0.19.0",
+        "psalm/plugin-symfony": "^5.2",
         "roave/security-advisories": "dev-latest",
         "symfony/browser-kit": "7.2.*",
         "symfony/css-selector": "7.2.*",
         "symfony/maker-bundle": "^1.50",
         "symfony/phpunit-bridge": "^7.2",
         "symfony/stopwatch": "7.2.*",
-        "symfony/web-profiler-bundle": "7.2.*"
+        "symfony/web-profiler-bundle": "7.2.*",
+        "vimeo/psalm": "^5.26"
     },
     "config": {
         "allow-plugins": {
