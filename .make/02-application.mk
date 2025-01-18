@@ -30,6 +30,14 @@ composer-install: ## Install composer dependencies
 	"$(MAKE)" composer ARGS="install --prefer-dist --no-progress --no-scripts --no-interaction --optimize-autoloader"
 	"$(MAKE)" composer ARGS="dump-autoload --classmap-authoritative"
 
+.PHONY: lint
+lint: ## Check the code and display suggestions to address linting issues
+	"$(MAKE)" execute-in-container DOCKER_SERVICE_NAME=$(DOCKER_SERVICE_NAME_PHP_FPM) COMMAND="vendor/bin/ecs check"
+
+.PHONY: lint-fix
+lint-fix: ## Check the code and lint issues
+	"$(MAKE)" execute-in-container DOCKER_SERVICE_NAME=$(DOCKER_SERVICE_NAME_PHP_FPM) COMMAND="vendor/bin/ecs check --fix"
+
 .PHONY: test
 test: test-unit test-integration test-application ## Run all tests of the application
 

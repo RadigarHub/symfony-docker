@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Symfony\Component\Dotenv\Dotenv;
 
 require dirname(__DIR__) . '/vendor/autoload.php';
@@ -31,10 +33,4 @@ passthru(
 );
 
 // Create test database schema
-passthru(
-    sprintf(
-        'APP_ENV=%s php "%s/../bin/console" doctrine:schema:create',
-        $_ENV['APP_ENV'],
-        __DIR__
-    )
-);
+passthru(sprintf('APP_ENV=%s php "%s/../bin/console" doctrine:schema:create', $_ENV['APP_ENV'], __DIR__));

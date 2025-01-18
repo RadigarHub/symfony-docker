@@ -14,7 +14,7 @@ final class HealthCheckGetControllerTest extends WebTestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->client = static::createClient();
+        $this->client = self::createClient();
         $this->client->setServerParameter('CONTENT_TYPE', 'application/json');
     }
 
