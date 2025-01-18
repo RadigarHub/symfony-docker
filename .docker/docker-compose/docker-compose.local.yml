@@ -19,6 +19,9 @@ services:
       - network
     extra_hosts:
       - host.docker.internal:host-gateway
+    depends_on:
+      - postgres
+      - postgres-test
 
   nginx:
     volumes:
@@ -56,7 +59,28 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD?}
     volumes:
       - postgres-data:/var/lib/postgresql/data:rw
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     networks:
       - network
     ports:
       - "${POSTGRES_HOST_PORT:-5432}:5432"
+
+  postgres-test:
+    image: postgres:${POSTGRES_VERSION?}
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB_TEST:-application_db_test}
+      POSTGRES_USER: ${POSTGRES_USER_TEST:-application_user_test}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD_TEST?}
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -d $${POSTGRES_DB_TEST} -U $${POSTGRES_USER_TEST}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - network
+    ports:
+      - "${POSTGRES_HOST_PORT_TEST:-5433}:5432"

@@ -30,6 +30,21 @@ composer-install: ## Install composer dependencies
 	"$(MAKE)" composer ARGS="install --prefer-dist --no-progress --no-scripts --no-interaction --optimize-autoloader"
 	"$(MAKE)" composer ARGS="dump-autoload --classmap-authoritative"
 
-.PHONY: db-schema
-db-schema: ## Create DB schema
-	$(EXECUTE_IN_APPLICATION_CONTAINER) php bin/console doctrine:schema:create $(ARGS)
+.PHONY: test
+test: test-unit test-integration test-application ## Run all tests of the application
+
+.PHONY: test-unit
+test-unit: ## Run all unit tests of the application
+	"$(MAKE)" execute-in-container DOCKER_SERVICE_NAME=$(DOCKER_SERVICE_NAME_PHP_FPM) COMMAND="bin/phpunit --order-by=random --testsuite Unit"
+
+.PHONY: test-integration
+test-integration: ## Run all integration tests of the application
+	"$(MAKE)" execute-in-container DOCKER_SERVICE_NAME=$(DOCKER_SERVICE_NAME_PHP_FPM) COMMAND="bin/phpunit --order-by=random --testsuite Integration"
+
+.PHONY: test-application
+test-application: ## Run all application tests of the application
+	"$(MAKE)" execute-in-container DOCKER_SERVICE_NAME=$(DOCKER_SERVICE_NAME_PHP_FPM) COMMAND="bin/phpunit --order-by=random --testsuite Application"
+
+.PHONY: test-coverage
+test-coverage: ## Run test coverage for the application. First you need to run command "make enable-xdebug".
+	"$(MAKE)" execute-in-container DOCKER_SERVICE_NAME=$(DOCKER_SERVICE_NAME_PHP_FPM) COMMAND="bin/phpunit --coverage-text --coverage-clover=coverage.xml --order-by=random"

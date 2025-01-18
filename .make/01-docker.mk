@@ -118,7 +118,3 @@ docker-down: validate-docker-variables ## Stop and remove all docker containers.
 .PHONY: docker-config
 docker-config: validate-docker-variables ## List the configuration
 	@$(DOCKER_COMPOSE) config
-
-.PHONY: docker-prune
-docker-prune: ## Remove ALL unused docker resources, including volumes
-	@docker system prune -a -f --volumes
