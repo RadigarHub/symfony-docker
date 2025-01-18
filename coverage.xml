@@ -1,20 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <coverage generated="1737212232">
-  <project timestamp="1737212232">
-    <file name="/var/www/app/src/Infrastructure/Api/Controller/HealthCheckGetController.php">
-      <class name="App\Infrastructure\Api\Controller\HealthCheckGetController" namespace="global">
-        <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
-      </class>
-      <line num="13" type="method" name="__invoke" visibility="public" complexity="1" crap="1" count="1"/>
-      <line num="15" type="stmt" count="1"/>
-      <metrics loc="18" ncloc="18" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
-    </file>
-    <file name="/var/www/app/src/Kernel.php">
-      <class name="App\Kernel" namespace="global">
-        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
-      </class>
-      <metrics loc="12" ncloc="12" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
-    </file>
-    <metrics files="2" loc="30" ncloc="30" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
-  </project>
+    <project timestamp="1737212232">
+        <file name="/var/www/app/src/Infrastructure/Api/Controller/HealthCheckGetController.php">
+            <class name="App\Infrastructure\Api\Controller\HealthCheckGetController" namespace="global">
+                <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0"
+                         statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
+            </class>
+            <line num="13" type="method" name="__invoke" visibility="public" complexity="1" crap="1" count="1"/>
+            <line num="15" type="stmt" count="1"/>
+            <metrics loc="18" ncloc="18" classes="1" methods="1" coveredmethods="1" conditionals="0"
+                     coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
+        </file>
+        <file name="/var/www/app/src/Kernel.php">
+            <class name="App\Kernel" namespace="global">
+                <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0"
+                         statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+            </class>
+            <metrics loc="12" ncloc="12" classes="0" methods="0" coveredmethods="0" conditionals="0"
+                     coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+        </file>
+        <metrics files="2" loc="30" ncloc="30" classes="1" methods="1" coveredmethods="1" conditionals="0"
+                 coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
+    </project>
 </coverage>

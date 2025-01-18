@@ -1,4 +1,4 @@
 health-check:
-  path: /api/health-check
-  controller: App\Infrastructure\Api\Controller\HealthCheckGetController
-  methods:  [GET]
+    path: /api/health-check
+    controller: App\Infrastructure\Api\Controller\HealthCheckGetController
+    methods: [ GET ]
