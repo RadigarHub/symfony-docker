@@ -27,8 +27,7 @@ composer: ## Run composer commands. Specify the command e.g. via ARGS="install"
 
 .PHONY: composer-install
 composer-install: ## Install composer dependencies
-	"$(MAKE)" composer ARGS="install --prefer-dist --no-progress --no-scripts --no-interaction --optimize-autoloader"
-	"$(MAKE)" composer ARGS="dump-autoload --classmap-authoritative"
+	"$(MAKE)" composer ARGS="install --prefer-dist --no-progress --no-scripts --no-interaction"
 
 .PHONY: lint
 lint: ## Check the application code and display suggestions to address linting issues
