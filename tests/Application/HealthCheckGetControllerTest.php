@@ -6,6 +6,7 @@ namespace Tests\App\Application;
 
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\HttpFoundation\Response;
 
 class HealthCheckGetControllerTest extends WebTestCase
 {
@@ -15,13 +16,14 @@ class HealthCheckGetControllerTest extends WebTestCase
     {
         parent::setUp();
         $this->client = self::createClient();
-        $this->client->setServerParameter('CONTENT_TYPE', 'application/json');
     }
 
     public function test_response_is_ok(): void
     {
         $this->client->request('GET', '/api/health-check');
 
-        self::assertResponseIsSuccessful();
+        self::assertResponseStatusCodeSame(Response::HTTP_OK);
+        self::assertResponseHeaderSame('Content-Type', 'application/json');
+        self::assertSame('{"message":"OK"}', $this->client->getResponse()->getContent());
     }
 }
