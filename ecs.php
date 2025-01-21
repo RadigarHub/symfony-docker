@@ -4,9 +4,11 @@ use CodelyTv\CodingStyle;
 use Symplify\EasyCodingStandard\Config\ECSConfig;
 use Symplify\EasyCodingStandard\ValueObject\Option;
 
-return function (ECSConfig $ecsConfig): void {
-    $ecsConfig->paths([__DIR__ . '/src',]);
-    $ecsConfig->paths([__DIR__ . '/tests',]);
+return static function (ECSConfig $ecsConfig): void {
+    $ecsConfig->paths([
+        __DIR__ . '/src',
+        __DIR__ . '/tests',
+    ]);
 
     $ecsConfig->sets([CodingStyle::DEFAULT]);
 
